@@ -1,0 +1,34 @@
+1. Sebutkan kolom yang bisa dijadikan primary key dan foreign key.
+Jawaban:
+- Tabel Pembayaran
+  PK: NoKontrak
+  FK: KodeCabang, KodeMotor
+
+- Tabel Cabang:
+  PK: KodeCabang
+
+- Tabel Motor:
+  PK: KodeMotor
+
+2. Tuliskan query untuk menampilkan data pembayaran yang dibayarpada tanggal 20-10-2014.
+Jawaban:
+SELECT * FROM Pembayaran WHERE CAST(TglBayar AS DATE) = '2014-10-20'
+
+3. Tuliskan query untuk menambahkan data pada tabel “Cabang”, dengan informasi berikut: kode cabang 200, nama cabang Tangerang.
+Jawaban:
+INSERT INTO Cabang (KodeCabang, NamaCabang) VALUES ('200', 'Tangerang')
+
+4. Tuliskan query untuk update data “Kode Motor” pada tabel “Pembayaran” menjadi “001” untuk semua Cabang Jakarta.
+Jawaban:
+UPDATE Pembayaran SET KodeMotor = '001' WHERE KodeCabang = '115'
+
+5. Tuliskan query untuk menampilkan data berikut.
+Jawaban:
+SELECT a.NoKontrak, a.TglBayar, a.JumlahBayar, a.KodeCabang, b.NamaCabang, a.NoKwitansi, a.KodeMotor, c.NamaMotor FROM Pembayaran a JOIN Cabang b ON a.KodeCabang = b.KodeCabang JOIN Motor c ON a.KodeMotor = c.KodeMotor
+
+6. Tuliskan query untukmenampilkan data berikut.
+Jawaban:
+SELECT a.KodeCabang, a.NamaCabang, b.NoKontrak, b.NoKwitansi FROM Cabang a LEFT JOIN Pembayaran b ON a.KodeCabang = b.KodeCabang
+
+7. Tuliskan query untukmenampilkan data berikut.
+SELECT a.KodeCabang, a.KodeCabang, COUNT(b.KodeCabang) AS TotalData, ISNULL(SUM(b.JumlahBayar), 0) AS TotalBayar FROM Cabang a LEFT JOIN Pembayaran b ON a.KodeCabang = b.KodeCabang GROUP BY a.KodeCabang
